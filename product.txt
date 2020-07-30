@@ -1,0 +1,145 @@
+create database day10;
+use day10;
+
+SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for member
+-- ----------------------------
+DROP TABLE IF EXISTS `member`;
+CREATE TABLE `member` (
+  `id` int(11) NOT NULL,
+  `NAME` varchar(50) DEFAULT NULL,
+  `nickname` varchar(50) DEFAULT NULL,
+  `phoneNum` varchar(50) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of member
+-- ----------------------------
+INSERT INTO `member` VALUES ('10', '张三', '大黑牛', '12378945', '23567@qq.com');
+
+-- ----------------------------
+-- Table structure for orders
+-- ----------------------------
+DROP TABLE IF EXISTS `orders`;
+CREATE TABLE `orders` (
+  `id` int(11) NOT NULL,
+  `orderNum` varchar(100) DEFAULT NULL,
+  `orderTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `peopleCount` int(11) DEFAULT NULL,
+  `orderDesc` varchar(100) DEFAULT NULL,
+  `payType` int(11) DEFAULT NULL,
+  `orderStatus` int(11) DEFAULT NULL,
+  `productId` int(11) DEFAULT NULL,
+  `memberId` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_Reference_1` (`productId`),
+  KEY `FK_Reference_2` (`memberId`),
+  CONSTRAINT `FK_Reference_1` FOREIGN KEY (`productId`) REFERENCES `product` (`id`),
+  CONSTRAINT `FK_Reference_2` FOREIGN KEY (`memberId`) REFERENCES `member` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of orders
+-- ----------------------------
+INSERT INTO `orders` VALUES ('1', 'order001', '2020-06-30 10:42:12', '10', '不要延迟', '0', '1', '34', null);
+
+-- ----------------------------
+-- Table structure for order_traveller
+-- ----------------------------
+DROP TABLE IF EXISTS `order_traveller`;
+CREATE TABLE `order_traveller` (
+  `orderId` int(11) DEFAULT NULL,
+  `travellerId` int(11) DEFAULT NULL,
+  KEY `FK_Reference_3` (`orderId`),
+  KEY `FK_Reference_4` (`travellerId`),
+  CONSTRAINT `FK_Reference_3` FOREIGN KEY (`orderId`) REFERENCES `orders` (`id`),
+  CONSTRAINT `FK_Reference_4` FOREIGN KEY (`travellerId`) REFERENCES `traveller` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of order_traveller
+-- ----------------------------
+INSERT INTO `order_traveller` VALUES ('1', '20');
+
+-- ----------------------------
+-- Table structure for product
+-- ----------------------------
+DROP TABLE IF EXISTS `product`;
+CREATE TABLE `product` (
+  `id` int(11) NOT NULL,
+  `productNum` int(11) DEFAULT NULL,
+  `productName` varchar(100) DEFAULT NULL,
+  `cityName` varchar(50) DEFAULT NULL,
+  `DepartureTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `productPrice` double DEFAULT NULL,
+  `productDesc` varchar(100) DEFAULT NULL,
+  `productStatus` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of product
+-- ----------------------------
+INSERT INTO `product` VALUES ('1', '1101', '武汉', '武汉', '2020-06-04 22:53:37', '1200', '非常便宜', '1');
+INSERT INTO `product` VALUES ('2', '1002', '国庆7天游', '东京', '2020-06-02 14:06:23', '50000', '非常划算', '1');
+INSERT INTO `product` VALUES ('3', '1003', '春节10日游', '海南', '2020-06-22 14:07:25', '20000', '非常便宜', '1');
+INSERT INTO `product` VALUES ('5', '1104', '武汉', '武汉', '2020-06-04 22:53:37', '1200', '非常便宜', '1');
+INSERT INTO `product` VALUES ('6', '1104', '武汉', '武汉', '2020-06-04 22:53:37', '1200', '非常便宜', '1');
+INSERT INTO `product` VALUES ('7', '1104', '武汉', '武汉', '2020-06-04 22:53:37', '1200', '非常便宜', '1');
+INSERT INTO `product` VALUES ('8', '1104', '武汉', '武汉', '2020-06-04 22:53:37', '1200', '非常便宜', '1');
+INSERT INTO `product` VALUES ('9', '1104', '武汉', '武汉', '2020-06-04 22:53:37', '1200', '非常便宜', '1');
+INSERT INTO `product` VALUES ('10', '1104', '武汉', '武汉', '2020-06-04 22:53:37', '1200', '非常便宜', '1');
+INSERT INTO `product` VALUES ('11', '1104', '武汉', '武汉', '2020-06-04 22:53:37', '1200', '非常便宜', '1');
+INSERT INTO `product` VALUES ('12', '1104', '武汉', '武汉', '2020-06-04 22:53:37', '1200', '非常便宜', '1');
+INSERT INTO `product` VALUES ('13', '1104', '武汉', '武汉', '2020-06-04 22:53:37', '1200', '非常便宜', '1');
+INSERT INTO `product` VALUES ('14', '1104', '武汉', '武汉', '2020-06-04 22:53:37', '1200', '非常便宜', '1');
+INSERT INTO `product` VALUES ('15', '1104', '武汉', '武汉', '2020-06-04 22:53:37', '1200', '非常便宜', '1');
+INSERT INTO `product` VALUES ('16', '1104', '武汉', '武汉', '2020-06-04 22:53:37', '1200', '非常便宜', '1');
+INSERT INTO `product` VALUES ('17', '1104', '武汉', '武汉', '2020-06-04 22:53:37', '1200', '非常便宜', '1');
+INSERT INTO `product` VALUES ('18', '1104', '武汉', '武汉', '2020-06-04 22:53:37', '1200', '非常便宜', '1');
+INSERT INTO `product` VALUES ('19', '1104', '武汉', '武汉', '2020-06-04 22:53:37', '1200', '非常便宜', '1');
+INSERT INTO `product` VALUES ('20', '1104', '武汉', '武汉', '2020-06-04 22:53:37', '1200', '非常便宜', '1');
+INSERT INTO `product` VALUES ('21', '1104', '武汉', '武汉', '2020-06-04 22:53:37', '1200', '非常便宜', '1');
+INSERT INTO `product` VALUES ('22', '1104', '武汉', '武汉', '2020-06-04 22:53:37', '1200', '非常便宜', '1');
+INSERT INTO `product` VALUES ('23', '1104', '武汉', '武汉', '2020-06-04 22:53:37', '1200', '非常便宜', '1');
+INSERT INTO `product` VALUES ('24', '1104', '武汉', '武汉', '2020-06-04 22:53:37', '1200', '非常便宜', '1');
+INSERT INTO `product` VALUES ('25', '1104', '武汉', '武汉', '2020-06-04 22:53:37', '1200', '非常便宜', '1');
+INSERT INTO `product` VALUES ('26', '1104', '武汉', '武汉', '2020-06-04 22:53:37', '1200', '非常便宜', '1');
+INSERT INTO `product` VALUES ('27', '1104', '武汉', '武汉', '2020-06-04 22:53:37', '1200', '非常便宜', '1');
+INSERT INTO `product` VALUES ('28', '1104', '武汉', '武汉', '2020-06-04 22:53:37', '1200', '非常便宜', '1');
+INSERT INTO `product` VALUES ('29', '1104', '武汉', '武汉', '2020-06-04 22:53:37', '1200', '非常便宜', '1');
+INSERT INTO `product` VALUES ('30', '1104', '武汉', '武汉', '2020-06-04 22:53:37', '1200', '非常便宜', '1');
+INSERT INTO `product` VALUES ('31', '1104', '武汉', '武汉', '2020-06-04 22:53:37', '1200', '非常便宜', '1');
+INSERT INTO `product` VALUES ('32', '1104', '武汉', '武汉', '2020-06-04 22:53:37', '1200', '非常便宜', '1');
+INSERT INTO `product` VALUES ('33', '1104', '武汉', '武汉', '2020-06-04 22:53:37', '1200', '非常便宜', '1');
+INSERT INTO `product` VALUES ('34', '1104', '武汉', '武汉', '2020-06-04 22:53:37', '1200', '非常便宜', '1');
+INSERT INTO `product` VALUES ('35', '1104', '武汉', '武汉', '2020-06-04 22:53:37', '1200', '非常便宜', '1');
+INSERT INTO `product` VALUES ('36', '1104', '武汉', '武汉', '2020-06-04 22:53:37', '1200', '非常便宜', '1');
+INSERT INTO `product` VALUES ('37', '78945', '南京七日游', '武汉', '2020-06-21 00:00:00', '20000', '11', '1');
+INSERT INTO `product` VALUES ('38', '789', '南京七日游', '武汉', '2020-06-02 00:00:00', '20000', 'nnnn', '1');
+INSERT INTO `product` VALUES ('39', '1123', '南京七日游', '武汉', '2020-06-04 00:00:00', '20000', '111', '1');
+INSERT INTO `product` VALUES ('40', '909090', '南京七日游', '武汉', '2020-06-02 00:00:00', '20000', '789456123', '1');
+
+-- ----------------------------
+-- Table structure for traveller
+-- ----------------------------
+DROP TABLE IF EXISTS `traveller`;
+CREATE TABLE `traveller` (
+  `id` int(11) NOT NULL,
+  `NAME` varchar(50) DEFAULT NULL,
+  `sex` varchar(20) DEFAULT NULL,
+  `phoneNum` varchar(50) DEFAULT NULL,
+  `credentialsType` int(11) DEFAULT NULL,
+  `credentialsNum` varchar(50) DEFAULT NULL,
+  `travellerType` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of traveller
+-- ----------------------------
+INSERT INTO `traveller` VALUES ('20', '张胜男', '男', '123456789123', '1', '420922198812111', '1');
